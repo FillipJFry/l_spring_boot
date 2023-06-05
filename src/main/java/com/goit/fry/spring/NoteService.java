@@ -1,29 +1,53 @@
 package com.goit.fry.spring;
 
-import java.util.List;
+import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Service
 public class NoteService {
 
-	List<Note> listAll() {
+	private final Map<Long, Note> data;
 
-		return null;
+	public NoteService() {
+
+		data = new HashMap<>();
 	}
 
-	Note add(Note note) {
+	public List<Note> listAll() {
 
-		return null;
+		return data.values().stream().toList();
 	}
 
-	void deleteById(long id) {
+	public Note add(Note note) {
 
+		if (data.containsKey(note.getId()))
+			throw new IllegalArgumentException("key already exists: " + note.getId());
+
+		data.put(note.getId(), note);
+		return note;
 	}
 
-	void update(Note note) {
+	public void deleteById(long id) {
 
+		if (!data.containsKey(id))
+			throw new IllegalArgumentException("no such key: " + id);
+
+		data.remove(id);
 	}
 
-	Note getById(long id) {
+	public void update(Note note) {
 
-		return null;
+		if (!data.containsKey(note.getId()))
+			throw new IllegalArgumentException("no such key: " + note.getId());
+
+		data.put(note.getId(), note);
+	}
+
+	public Note getById(long id) {
+
+		return data.get(id);
 	}
 }

@@ -1,12 +1,13 @@
 plugins {
 
 	id 'java'
+	id 'application'
 	id 'org.springframework.boot' version '3.1.0'
 	id 'io.spring.dependency-management' version '1.1.0'
 }
 
 group = 'com.goit.fry'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 sourceCompatibility = '17'
 
 repositories {
@@ -19,7 +20,14 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	compileOnly 'org.projectlombok:lombok:1.18.26'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+}
+
+application {
+
+	mainClass = 'com.goit.fry.spring.Application'
 }
 
 tasks.named('test') {

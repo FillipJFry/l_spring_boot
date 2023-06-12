@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'com.goit.fry'
-version = '1.0.0'
+version = '1.0.1'
 sourceCompatibility = '17'
 
 repositories {
@@ -18,7 +18,9 @@ repositories {
 
 dependencies {
 
-	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	compileOnly 'org.projectlombok:lombok'

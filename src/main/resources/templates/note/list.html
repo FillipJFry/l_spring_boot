@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Notes list</title>
+</head>
+<body>
+<p><a href="/note/edit">Create new</a></p>
+<table border="1">
+    <thead>
+    <tr>
+        <th><b>ID</b></th>
+        <th><b>Title</b></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="note : ${notes}">
+        <td><span th:text="${note.id}"></span></td>
+        <td><span th:text="${note.title}"></span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

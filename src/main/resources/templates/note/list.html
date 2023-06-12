@@ -12,12 +12,20 @@
     <tr>
         <th><b>ID</b></th>
         <th><b>Title</b></th>
+        <th><b>Content</b></th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="note : ${notes}">
-        <td><span th:text="${note.id}"></span></td>
-        <td><span th:text="${note.title}"></span></td>
+        <td><a th:href="@{'/note/edit?id=' + ${note.id}}" th:text="${note.id}"></a></td>
+        <td th:text="${note.title}"></td>
+        <td th:text="${note.content}"></td>
+        <td>
+            <form action="#" th:action="@{/note/delete}" th:object="${noteToDel}" method="POST">
+                <input type="hidden" field="*{id}" name="id" th:value="${note.id}">
+                <input type="submit" value="Delete">
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>

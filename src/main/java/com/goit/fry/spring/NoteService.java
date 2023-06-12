@@ -2,18 +2,17 @@ package com.goit.fry.spring;
 
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.TreeMap;
 
 @Service
 public class NoteService {
 
-	private final Map<Long, Note> data;
+	private final TreeMap<Long, Note> data;
 
 	public NoteService() {
 
-		data = new HashMap<>();
+		data = new TreeMap<>();
 	}
 
 	public List<Note> listAll() {
@@ -21,12 +20,20 @@ public class NoteService {
 		return data.values().stream().toList();
 	}
 
-	public Note add(Note note) {
+	public void add(Note note) {
 
 		if (data.containsKey(note.getId()))
 			throw new IllegalArgumentException("key already exists: " + note.getId());
 
 		data.put(note.getId(), note);
+	}
+
+	public Note addWithNewId(Note note) {
+
+		long newId = data.isEmpty() ? 1 : data.lastKey() + 1;
+		note.setId(newId);
+
+		data.put(newId, note);
 		return note;
 	}
 

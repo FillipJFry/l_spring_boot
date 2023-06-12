@@ -8,11 +8,11 @@
 <body>
 <form action="#" th:action="@{/note/edit}" th:object="${note}" method="POST">
     <p>ID:</p>
-    <p><input type="text" field="*{id}" name="id"></p>
+    <p><input type="text" field="*{id}" name="id" th:value="${existing_note.id}" autocomplete="off"></p>
     <p>Title:</p>
-    <p><input type="text" field="*{title}" name="title"></p>
+    <p><input type="text" field="*{title}" name="title" th:value="${existing_note.title}" autocomplete="off"></p>
     <p>Content:</p>
-    <p><input type="text" field="*{content}" name="content"></p>
+    <p><input type="text" field="*{content}" name="content" th:value="${existing_note.content}" autocomplete="off"></p>
     <p><input type="submit" value="Submit"></p>
 </form>
 </body>

@@ -26,10 +26,11 @@ public class NoteController {
 
 		ModelAndView result = new ModelAndView("note/edit");
 		Note note;
-		if (id != null)
+		if (id != null) {
 			note = srv.getById(id);
-		else
+		} else {
 			note = new Note(EMPTY_ID, "", "");
+		}
 
 		result.addObject("existing_note", note);
 		return result;
@@ -39,12 +40,15 @@ public class NoteController {
 	public String create(@ModelAttribute Note note) {
 
 		long id = note.getId();
-		if (id <= EMPTY_ID)
+		if (id <= EMPTY_ID) {
 			srv.addWithNewId(note);
-		else if (srv.getById(id) == null)
-			srv.add(note);
-		else
-			srv.update(note);
+		} else {
+			if (srv.getById(id) == null) {
+				srv.add(note);
+			} else {
+				srv.update(note);
+			}
+		}
 
 		return "redirect:/note/list";
 	}

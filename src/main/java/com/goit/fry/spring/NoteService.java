@@ -22,8 +22,9 @@ public class NoteService {
 
 	public void add(Note note) {
 
-		if (data.containsKey(note.getId()))
+		if (data.containsKey(note.getId())) {
 			throw new IllegalArgumentException("key already exists: " + note.getId());
+		}
 
 		data.put(note.getId(), note);
 	}
@@ -39,16 +40,18 @@ public class NoteService {
 
 	public void deleteById(long id) {
 
-		if (!data.containsKey(id))
+		if (!data.containsKey(id)) {
 			throw new IllegalArgumentException("no such key: " + id);
+		}
 
 		data.remove(id);
 	}
 
 	public void update(Note note) {
 
-		if (!data.containsKey(note.getId()))
+		if (!data.containsKey(note.getId())) {
 			throw new IllegalArgumentException("no such key: " + note.getId());
+		}
 
 		data.put(note.getId(), note);
 	}

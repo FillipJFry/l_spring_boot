@@ -43,11 +43,7 @@ public class NoteController {
 		if (id <= EMPTY_ID) {
 			srv.addWithNewId(note);
 		} else {
-			if (srv.getById(id) == null) {
-				srv.add(note);
-			} else {
-				srv.update(note);
-			}
+			srv.save(note);
 		}
 
 		return "redirect:/note/list";

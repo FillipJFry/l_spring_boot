@@ -8,31 +8,35 @@ import java.util.List;
 @Service
 public class NoteService {
 
-	@Autowired
-	private NoteRepository repository;
+    private static final long EMPTY_ID = -1;
+    @Autowired
+    private NoteRepository repository;
 
-	public List<Note> listAll() {
+    public List<Note> listAll() {
 
-		return repository.findAll();
-	}
+        return repository.findAll();
+    }
 
-	public void save(Note note) {
+    public void save(Note note) {
 
-		repository.save(note);
-	}
+        repository.save(note);
+    }
 
-	public Note addWithNewId(Note note) {
+    public void deleteById(long id) {
 
-		return repository.save(note);
-	}
+        repository.deleteById(id);
+    }
 
-	public void deleteById(long id) {
+    public Note getById(Long id) {
 
-		repository.deleteById(id);
-	}
+        if (id != null && repository.existsById(id)) {
+            return repository.findById(id).orElse(createEmptyNote());
+        }
+        return createEmptyNote();
+    }
 
-	public Note getById(long id) {
+    private static Note createEmptyNote() {
 
-		return repository.getReferenceById(id);
-	}
+        return new Note(EMPTY_ID, "", "");
+    }
 }

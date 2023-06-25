@@ -29,5 +29,10 @@
     </tr>
     </tbody>
 </table>
+<p>
+    <form th:if="${userLoggedIn} == 'yes'" th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout" />
+    </form>
+</p>
 </body>
 </html>

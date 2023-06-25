@@ -1,6 +1,8 @@
 package com.goit.fry.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,11 +14,24 @@ public class NoteController {
     @Autowired
     private NoteService srv;
 
+    @GetMapping("/pwd")
+    public ModelAndView showPwdHash() {
+
+        ModelAndView result = new ModelAndView("note/hash");
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        String pwdHash = encoder.encode("jdbcDefault");
+        result.addObject("pwdHash", pwdHash);
+        return result;
+    }
+
     @GetMapping("/list")
-    public ModelAndView getList() {
+    public ModelAndView getList(Authentication authentication) {
 
         ModelAndView result = new ModelAndView("note/list");
         result.addObject("notes", srv.listAll());
+        result.addObject("userLoggedIn",
+                authentication != null && authentication.isAuthenticated() ? "yes" : "no");
         return result;
     }
 
